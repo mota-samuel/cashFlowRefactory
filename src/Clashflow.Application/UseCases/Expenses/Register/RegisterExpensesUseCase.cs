@@ -5,13 +5,17 @@ using Cashflow.Domain.Enum;
 using Cashflow.Exception.ExceptionBase;
 
 namespace Cashflow.Application.UseCases.Expenses.Register;
-public class RegisterExpensesUseCase
+public class RegisterExpensesUseCase : IRegisterExpensesUseCase
 {
+    private readonly IExpensesRepositories _repository;
+    public RegisterExpensesUseCase(IExpensesRepositories repositorio)
+    {
+        _repository = repositorio;
+    }
     public ResponsResgisterExpenseJson Execute(RequestRegisterExepenseJson request)
     {
         Validate(request);
 
-        var dbContext = new CashFlowDbContext();
         var entity = new Expense
         {
             Title = request.Title,
@@ -21,8 +25,7 @@ public class RegisterExpensesUseCase
             PaymentType = (PaymentType)request.PaymentType
         };
 
-        dbContext.Expenses.Add(entity);
-        dbContext.SaveChanges();    
+        _repository.Add(entity);
 
 
         return new ResponsResgisterExpenseJson() { Title = request.Title};
