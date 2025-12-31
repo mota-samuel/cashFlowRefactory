@@ -3,7 +3,6 @@ using Cashflow.Communication.Responses;
 using Cashflow.Domain.Entities;
 using Cashflow.Domain.Enum;
 using Cashflow.Exception.ExceptionBase;
-using Cashflow.Infrastructure.DataAccess;
 
 namespace Cashflow.Application.UseCases.Expenses.Register;
 public class RegisterExpensesUseCase

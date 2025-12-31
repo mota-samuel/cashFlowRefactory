@@ -14,7 +14,6 @@
     <ProjectReference Include="..\Cashflow.Communication\Cashflow.Communication.csproj" />
     <ProjectReference Include="..\Cashflow.Domain\Cashflow.Domain.csproj" />
     <ProjectReference Include="..\Cashflow.Exception\Cashflow.Exception.csproj" />
-    <ProjectReference Include="..\Cashflow.Infrastructure\Cashflow.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

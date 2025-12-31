@@ -1,8 +1,5 @@
 using cashflow.Api.Filters;
 using cashflow.Api.Middleware;
-using Cashflow.Infrastructure.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
