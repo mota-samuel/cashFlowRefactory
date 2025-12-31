@@ -1,5 +1,8 @@
 using cashflow.Api.Filters;
 using cashflow.Api.Middleware;
+using Cashflow.Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //add o filtro de exceção global
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+
 
 var app = builder.Build();
 
