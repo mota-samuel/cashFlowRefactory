@@ -11,11 +11,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 //add o filtro de exceção global
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 //Criar a injecao de dependencia que instancia a funcao de persistir no DB
-builder.Services.AddInfrastructure();
+//esse parametro foi incluido para que a injecao de dependencia possa acessar a connectionString do AppSettings
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();

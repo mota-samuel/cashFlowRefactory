@@ -1,12 +1,27 @@
-﻿using Cashflow.Infrastructure.DataAccess.Repositories;
+﻿using Cashflow.Infrastructure.DataAccess;
+using Cashflow.Infrastructure.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cashflow.Infrastructure;
 public static class DependencyInjectionExtension
 {
-    public static void AddInfrastructure(this IServiceCollection builder)
+    public static void AddInfrastructure(this IServiceCollection builder, IConfiguration config)
+    {
+        AddRepository(builder);
+        AddDbContext(builder, config);
+    }
+    
+    private static void AddRepository(IServiceCollection builder)
     {
         builder.AddScoped<IExpensesRepositories, RepositoriesExpenses>();
+    }
+
+    private static void AddDbContext(IServiceCollection builder, IConfiguration config)
+    {
+        var connectionString = config.GetConnectionString("DefaultConnection"); ;
+        builder.AddDbContext<CashFlowDbContext>(config => config.UseSqlServer(connectionString));
     }
 }
 
