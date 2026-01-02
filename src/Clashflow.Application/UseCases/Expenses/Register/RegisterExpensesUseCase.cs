@@ -1,4 +1,5 @@
-﻿using Cashflow.Communication.Requests;
+﻿using AutoMapper;
+using Cashflow.Communication.Requests;
 using Cashflow.Communication.Responses;
 using Cashflow.Domain.Entities;
 using Cashflow.Domain.Enum;
@@ -10,30 +11,24 @@ public class RegisterExpensesUseCase : IRegisterExpensesUseCase
 {
     private readonly IExpensesRepositories _repository;
     private readonly IUnitOfWork _unitOfWork;
-    public RegisterExpensesUseCase(IExpensesRepositories repositorio, IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+    public RegisterExpensesUseCase(IExpensesRepositories repositorio, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _repository = repositorio;
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
     public async Task<ResponsResgisterExpenseJson> Execute(RequestRegisterExepenseJson request)
     {
         Validate(request);
-
-        var entity = new Expense
-        {
-            Title = request.Title,
-            Description = request.Description,
-            Date = request.Date,
-            Amount = request.Amount,
-            PaymentType = (PaymentType)request.PaymentType
-        };
-
+        //entre os sinais <> colocar a instancia de destino e entre os parentes a classe origem que vai ser preenchido o destino
+        var entity = _mapper.Map<Expense>(request);
         await _repository.Add(entity);
 
         await _unitOfWork.Commit();
 
 
-        return new ResponsResgisterExpenseJson() { Title = request.Title};
+        return _mapper.Map<ResponsResgisterExpenseJson>(entity);
     }
 
     private void Validate(RequestRegisterExepenseJson request)
