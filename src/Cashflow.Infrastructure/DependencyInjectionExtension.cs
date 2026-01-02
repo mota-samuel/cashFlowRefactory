@@ -1,4 +1,5 @@
-﻿using Cashflow.Infrastructure.DataAccess;
+﻿using Cashflow.Domain.Repositories;
+using Cashflow.Infrastructure.DataAccess;
 using Cashflow.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ public static class DependencyInjectionExtension
     
     private static void AddRepository(IServiceCollection builder)
     {
+        builder.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.AddScoped<IExpensesRepositories, RepositoriesExpenses>();
     }
 
