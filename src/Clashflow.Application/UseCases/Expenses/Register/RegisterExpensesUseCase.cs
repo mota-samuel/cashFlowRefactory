@@ -2,7 +2,6 @@
 using Cashflow.Communication.Requests;
 using Cashflow.Communication.Responses;
 using Cashflow.Domain.Entities;
-using Cashflow.Domain.Enum;
 using Cashflow.Domain.Repositories;
 using Cashflow.Exception.ExceptionBase;
 
