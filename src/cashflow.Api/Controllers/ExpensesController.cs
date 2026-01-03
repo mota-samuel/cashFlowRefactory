@@ -1,4 +1,5 @@
 ﻿using Cashflow.Application.UseCases.Expenses.GetAll;
+using Cashflow.Application.UseCases.Expenses.GetById;
 using Cashflow.Application.UseCases.Expenses.Register;
 using Cashflow.Communication.Requests;
 using Cashflow.Communication.Responses;
@@ -25,6 +26,8 @@ public class ExpensesController : ControllerBase
 
 
     [HttpGet]
+    [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> GetAllItems([FromServices] IGetAllExpensesUseCase useCase)
     {
         var response = await useCase.Execute();
@@ -33,6 +36,18 @@ public class ExpensesController : ControllerBase
             return Ok(response);
         
         return NoContent();
+    }
+
+    [HttpGet("{id:Guid}")]
+    [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById(
+                                                [FromServices] IGetExpenseByIdUseCase useCase, 
+                                                 Guid id)
+    {
+        var response = await useCase.Execute(id);
+
+        return Ok(response);
     }
 }
  

@@ -13,9 +13,14 @@ internal class RepositoriesExpenses : IExpensesRepositories
     {
        await _dbContext.AddAsync(expense);
     }
-
+    // utilizar AsNoTracking para situacoes onde nao alteramos os dados da consulta
     public async Task<List<Expense>> GetAll()
     {
-       return await _dbContext.Expenses.ToListAsync();
+        return await _dbContext.Expenses.AsNoTracking().ToListAsync();
+    }
+
+    public async Task<Expense> GetById(Guid id)
+    {
+        return await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(item => item.Id.Equals(id));
     }
 }

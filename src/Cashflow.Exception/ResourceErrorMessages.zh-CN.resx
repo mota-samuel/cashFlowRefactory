@@ -120,6 +120,9 @@
   <data name="DATE_IN_THE_FUTURE" xml:space="preserve">
     <value>日期不能是未来时间。</value>
   </data>
+  <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
+    <value>未找到指定的储藏室。</value>
+  </data>
   <data name="INVALID_PAYMENT_TYPE" xml:space="preserve">
     <value>无效的支付类型。</value>
   </data>

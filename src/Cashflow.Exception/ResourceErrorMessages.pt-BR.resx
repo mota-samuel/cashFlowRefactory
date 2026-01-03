@@ -120,6 +120,9 @@
   <data name="DATE_IN_THE_FUTURE" xml:space="preserve">
     <value>O campo data não pode ser no futuro.</value>
   </data>
+  <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
+    <value>A despensa não foi encontrada.</value>
+  </data>
   <data name="INVALID_PAYMENT_TYPE" xml:space="preserve">
     <value>Tipo de pagamento inválido.</value>
   </data>

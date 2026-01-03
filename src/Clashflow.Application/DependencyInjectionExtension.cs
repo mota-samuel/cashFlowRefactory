@@ -2,6 +2,7 @@
 
 using Cashflow.Application.Mapper;
 using Cashflow.Application.UseCases.Expenses.GetAll;
+using Cashflow.Application.UseCases.Expenses.GetById;
 using Cashflow.Application.UseCases.Expenses.Register;
 using Microsoft.Extensions.DependencyInjection;
 public static class DependencyInjectionExtension
@@ -11,6 +12,7 @@ public static class DependencyInjectionExtension
         AddUseCases(builder);
         AddMapper(builder);
         AddGetAllUseCase(builder);
+        AddGetByIdUseCase(builder);
     }
 
     private static void AddUseCases(IServiceCollection builder)
@@ -24,5 +26,9 @@ public static class DependencyInjectionExtension
     public static void AddGetAllUseCase(IServiceCollection builder)
     {
         builder.AddScoped<IGetAllExpensesUseCase, GetAllExpensesUseCase>();
+    }
+    public static void AddGetByIdUseCase(IServiceCollection builder)
+    {
+        builder.AddScoped<IGetExpenseByIdUseCase, GetExpenseByIdUseCase>();
     }
 }
