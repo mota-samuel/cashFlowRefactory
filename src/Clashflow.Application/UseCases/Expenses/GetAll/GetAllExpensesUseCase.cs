@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Cashflow.Communication.Responses;
+using Cashflow.Domain.Repositories.Expense;
 
 namespace Cashflow.Application.UseCases.Expenses.GetAll;
 public class GetAllExpensesUseCase : IGetAllExpensesUseCase
 {
-    private readonly IExpensesRepositories _repository;
+    private readonly IExpensesReadFromRepository _repository;
     private readonly IMapper _mapper;
-    public GetAllExpensesUseCase(IExpensesRepositories repository, IMapper mapper)
+    public GetAllExpensesUseCase(IExpensesReadFromRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

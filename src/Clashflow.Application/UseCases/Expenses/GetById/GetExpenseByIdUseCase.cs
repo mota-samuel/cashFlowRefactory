@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using Cashflow.Communication.Responses;
+using Cashflow.Domain.Repositories.Expense;
 using Cashflow.Exception;
 using Cashflow.Exception.ExceptionBase;
 
 namespace Cashflow.Application.UseCases.Expenses.GetById;
 public class GetExpenseByIdUseCase : IGetExpenseByIdUseCase
 {
-    private readonly IExpensesRepositories _repository;
+    private readonly IExpensesReadFromRepository _repository;
     private readonly IMapper _mapper;
-    public GetExpenseByIdUseCase(IExpensesRepositories repository, IMapper mapper)
+    public GetExpenseByIdUseCase(IExpensesReadFromRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

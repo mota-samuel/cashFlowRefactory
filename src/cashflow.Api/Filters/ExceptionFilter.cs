@@ -10,7 +10,38 @@ public class ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        switch (context.Exception)
+        if(context.Exception is CashflowException)
+        {
+            HandleProjectException(context);
+        }
+        else
+        {
+            ThrowUnknownException(context);
+        }
+
+    }
+
+    private void HandleProjectException(ExceptionContext context)
+    {
+        //com o cast declarado desta forma, se a excecao nao for um cashflowException, ira acontecer uma excecao, se declarar usando a palavra reservada `as` e a '!' o cod executa como nulo
+        var cashflowException = (CashflowException)context.Exception;
+        context.HttpContext.Response.StatusCode = cashflowException.StatusCode;
+        context.Result = new ObjectResult(cashflowException.GetErrors());
+    }
+
+    private void ThrowUnknownException(ExceptionContext context)
+    {
+        var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR);
+
+        context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+        context.Result = new ObjectResult(errorResponse);
+    }
+}
+
+/*No switch abaixo eu havia feito uma refatoracao no codigo do projeto, no cod acima foi refatorado para abstrair o filtro de forma a nao ter que ficar modificando o cod para incluir novos filtros, aplicando o conceito Open-Close do SOLID
+ * 
+ * switch (context.Exception)
         {
             case ErrorOnValidationException ex:
                 var errorResponseJSon = new ResponseErrorJson(ex.Errors);
@@ -36,30 +67,7 @@ public class ExceptionFilter : IExceptionFilter
 
     //eu isolei todo esse contexto de código para simplificar toda essa execucao em um unico switch, acredito que seja mais facil a interpretacao do cod e agilize a execucao
 
-    /*
-        private void HandleProjectException(ExceptionContext context)
-        {
+    
+       
 
-            switch
-
-
-
-            if(context.Exception is ErrorOnValidationException)
-            {
-                var cast = context.Exception as ErrorOnValidationException;
-
-                var errorResponse = new ResponseErrorJson(cast.Errors);
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new BadRequestObjectResult(errorResponse);
-            }
-        }
-
-        private void ThrowUnknownException(ExceptionContext context)
-        {
-            var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR);
-
-            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-
-            context.Result = new ObjectResult(errorResponse);
-        }*/
-}
+       */

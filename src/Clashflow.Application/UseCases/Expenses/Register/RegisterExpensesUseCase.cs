@@ -3,15 +3,16 @@ using Cashflow.Communication.Requests;
 using Cashflow.Communication.Responses;
 using Cashflow.Domain.Entities;
 using Cashflow.Domain.Repositories;
+using Cashflow.Domain.Repositories.Expense;
 using Cashflow.Exception.ExceptionBase;
 
 namespace Cashflow.Application.UseCases.Expenses.Register;
 public class RegisterExpensesUseCase : IRegisterExpensesUseCase
 {
-    private readonly IExpensesRepositories _repository;
+    private readonly IExpensesWriteRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public RegisterExpensesUseCase(IExpensesRepositories repositorio, IUnitOfWork unitOfWork, IMapper mapper)
+    public RegisterExpensesUseCase(IExpensesWriteRepository repositorio, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _repository = repositorio;
         _unitOfWork = unitOfWork;
