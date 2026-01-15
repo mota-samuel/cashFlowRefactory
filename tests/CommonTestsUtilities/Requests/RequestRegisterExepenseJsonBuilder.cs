@@ -6,7 +6,7 @@ namespace CommonTestsUtilities.Requests;
 public class RequestRegisterExepenseJsonBuilder
 {
     //A classe Builder serve para facilitar a criação de objetos complexos em testes, ela foi definida como static para permitir o acesso direto aos seus métodos sem a necessidade de instanciar a classe.
-    public static RequestRegisterExepenseJson Build()
+    public static RequestExepenseJson Build()
     {
        /* var faker = new Faker();
 
@@ -20,7 +20,7 @@ public class RequestRegisterExepenseJsonBuilder
         };*/
 
         //Esse metodo alternativo usando RuleFor, uma forma mais fluente de criar o objeto
-        var request = new Faker<RequestRegisterExepenseJson>()
+        var request = new Faker<RequestExepenseJson>()
             .RuleFor(r => r.Title, f => f.Commerce.ProductName())
             .RuleFor(r => r.Description, f => f.Lorem.Sentence())
             .RuleFor(r => r.Date, f => f.Date.Past(1))

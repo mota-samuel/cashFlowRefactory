@@ -1,4 +1,4 @@
-﻿using Cashflow.Application.UseCases.Expenses.Register;
+﻿using Cashflow.Application.UseCases.Expenses;
 using Cashflow.Communication.Enums;
 using Cashflow.Exception;
 using CommonTestsUtilities.Requests;
@@ -12,7 +12,7 @@ public class RegisterExpenseValidatorTest
     public void Success()
     {
         //Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         //como a funcao Build é static, nao precisa instanciar a classe RequestRegisterExepenseJsonBuilder para acessar a funcao Build
         var request = RequestRegisterExepenseJsonBuilder.Build();
 
@@ -32,7 +32,7 @@ public class RegisterExpenseValidatorTest
     public void Error_TitleIsEmpty(string title)
     {
         //Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestRegisterExepenseJsonBuilder.Build();
         request.Title = title;
         //Act
@@ -52,7 +52,7 @@ public class RegisterExpenseValidatorTest
     public void Error_ValueGreatherThanZero(decimal amount)
     {
         //Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestRegisterExepenseJsonBuilder.Build();
         request.Amount = amount;
         //Act
@@ -69,7 +69,7 @@ public class RegisterExpenseValidatorTest
     public void Error_PaymentType()
     {
         //Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestRegisterExepenseJsonBuilder.Build();
         request.PaymentType = (PaymentType)10;
         //Act
@@ -86,7 +86,7 @@ public class RegisterExpenseValidatorTest
     public void Error_DateFuture()
     {
         //Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestRegisterExepenseJsonBuilder.Build();
         request.Date = DateTime.UtcNow.AddDays(2);
         //Act

@@ -18,7 +18,7 @@ public class RegisterExpensesUseCase : IRegisterExpensesUseCase
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    public async Task<ResponsResgisterExpenseJson> Execute(RequestRegisterExepenseJson request)
+    public async Task<ResponsResgisterExpenseJson> Execute(RequestExepenseJson request)
     {
         Validate(request);
         //entre os sinais <> colocar a instancia de destino e entre os parentes a classe origem que vai ser preenchido o destino
@@ -31,9 +31,9 @@ public class RegisterExpensesUseCase : IRegisterExpensesUseCase
         return _mapper.Map<ResponsResgisterExpenseJson>(entity);
     }
 
-    private void Validate(RequestRegisterExepenseJson request)
+    private void Validate(RequestExepenseJson request)
     {
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var validationResult = validator.Validate(request);
         if (!validationResult.IsValid)
         {
