@@ -41,6 +41,20 @@ internal class RepositoriesExpenses : IExpensesReadFromRepository, IExpensesWrit
 
     public void Update(Expense expense)
     {
-        throw new NotImplementedException();
+        _dbContext.Expenses.Update(expense);
+    }
+
+    public async Task<List<Expense>> FilterByMonth(DateOnly date)
+    {
+        var dateStart = new DateTime(date.Year, date.Month,1).Date;
+        var lastDay = DateTime.DaysInMonth(date.Year, date.Month);
+        var dateEnd = new DateTime(date.Year, date.Month, lastDay, hour: 23, minute:59, second:59);
+
+        return await _dbContext.Expenses
+            .AsNoTracking()
+            .Where(expense => expense.Date >= dateStart && expense.Date <= dateEnd)
+            .OrderBy(expense => expense.Date)
+            .ThenBy(expense => expense.Title)
+            .ToListAsync();
     }
 }
