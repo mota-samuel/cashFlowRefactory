@@ -4,5 +4,5 @@ using Cashflow.Domain.Entities;
 public interface IExpensesWriteRepository
 {
     public Task Add(Expense expense);
-    public Task<bool> Delete(Guid id);
+    public Task<bool> Delete(long id);
 }

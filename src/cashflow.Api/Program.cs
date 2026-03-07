@@ -2,6 +2,8 @@ using cashflow.Api.Filters;
 using cashflow.Api.Middleware;
 using Cashflow.Application;
 using Cashflow.Infrastructure;
+using Cashflow.Infrastructure.Migrations;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,4 +39,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await MigrationDataBase();
+
 app.Run();
+
+async Task MigrationDataBase()
+{
+    await using var scope = app.Services.CreateAsyncScope();
+
+    await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
+}

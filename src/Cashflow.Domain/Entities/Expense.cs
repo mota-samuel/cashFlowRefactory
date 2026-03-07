@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Cashflow.Domain.Entities;
 public class Expense
 {
-    [Key]
-    public Guid Id { get; set; }
+    
+    public long Id { get; set; }
 
     [MaxLength(255)]
     public required string Title { get; set; }
@@ -20,5 +20,7 @@ public class Expense
     public required decimal Amount { get; set; }
 
     public required PaymentType PaymentType { get; set; }
+    public required Guid UserId { get; set; }
+    public User User { get; set; } = default!;
 }
 

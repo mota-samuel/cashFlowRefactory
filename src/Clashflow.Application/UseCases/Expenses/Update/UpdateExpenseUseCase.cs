@@ -20,7 +20,7 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
     }
 
 
-    public async Task Execute(Guid id, RequestExepenseJson request)
+    public async Task Execute(long id, RequestExepenseJson request)
     {
         Validator(request);
 

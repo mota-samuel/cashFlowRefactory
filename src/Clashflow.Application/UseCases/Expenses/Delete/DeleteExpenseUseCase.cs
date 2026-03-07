@@ -15,7 +15,7 @@ public class DeleteExpenseUseCase : IDeleteExpenseUseCase
         _repository = repository;
         _unitOfWork = unitOfWork;
     }
-    public async Task Execute(Guid id)
+    public async Task Execute(long id)
     {
         var result = await _repository.Delete(id);
         

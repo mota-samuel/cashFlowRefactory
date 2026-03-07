@@ -1,12 +1,8 @@
-﻿using ClosedXML.Excel;
+﻿using Cashflow.Domain.Entities;
+using Cashflow.Domain.Enum;
 using Cashflow.Domain.Reports;
 using Cashflow.Domain.Repositories.Expense;
-using AutoMapper;
-using Cashflow.Domain.Entities;
-using Cashflow.Domain.Enum;
-using Cashflow.Exception.ExceptionBase;
-using Cashflow.Exception;
-using System.Threading.Tasks;
+using ClosedXML.Excel;
 
 namespace Cashflow.Application.UseCases.Expenses.Report.Month.Excel;
 public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
@@ -25,7 +21,7 @@ public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUs
         if (listOfExpenses is null)
             return [];
 
-        var workbook = new XLWorkbook();
+        using var workbook = new XLWorkbook();
         workbook.Author = "Samuka Mota";
         workbook.Style.Font.FontSize = 14;
         workbook.Style.Font.FontName = "Times New Roman";
