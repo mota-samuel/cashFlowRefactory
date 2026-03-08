@@ -7,6 +7,7 @@ using Cashflow.Application.UseCases.Expenses.GetById;
 using Cashflow.Application.UseCases.Expenses.Register;
 using Cashflow.Application.UseCases.Expenses.Report.Month.Excel;
 using Cashflow.Application.UseCases.Expenses.Update;
+using Cashflow.Application.UseCases.User.Register;
 using Microsoft.Extensions.DependencyInjection;
 public static class DependencyInjectionExtension
 {
@@ -24,6 +25,7 @@ public static class DependencyInjectionExtension
         builder.AddScoped<IDeleteExpenseUseCase, DeleteExpenseUseCase>();
         builder.AddScoped<IUpdateExpenseUseCase, UpdateExpenseUseCase>();
         builder.AddScoped<IGenerateExpensesReportExcelUseCase, GenerateExpensesReportExcelUseCase>();
+        builder.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
     }
 
 }

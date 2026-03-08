@@ -1,4 +1,6 @@
-﻿using Cashflow.Communication.Responses;
+﻿using Cashflow.Application.UseCases.User.Register;
+using Cashflow.Communication.Requests;
+using Cashflow.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cashflow.Api.Controllers;

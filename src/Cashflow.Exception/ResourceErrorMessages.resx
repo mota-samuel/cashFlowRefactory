@@ -123,8 +123,23 @@
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
     <value>The expense wasn`t found</value>
   </data>
+  <data name="INVALID_EMAIL" xml:space="preserve">
+    <value>The address email is invalid.</value>
+  </data>
   <data name="INVALID_PAYMENT_TYPE" xml:space="preserve">
     <value>Invalid payment type.</value>
+  </data>
+  <data name="NAME_EMPTY" xml:space="preserve">
+    <value>The name can`t be empty.</value>
+  </data>
+  <data name="PASSWORD_1UPPER" xml:space="preserve">
+    <value>It must contain at least one uppercase letter.</value>
+  </data>
+  <data name="PASSWORD_8CHAR" xml:space="preserve">
+    <value>The password must be at least 8 characters.</value>
+  </data>
+  <data name="PASSWORD_SPECIALCHAR" xml:space="preserve">
+    <value>The password must contain at least one special character.</value>
   </data>
   <data name="REQUIRED_TITLE" xml:space="preserve">
     <value>Title is required.</value>
