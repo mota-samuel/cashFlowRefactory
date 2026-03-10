@@ -88,6 +88,15 @@ namespace Cashflow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password must have at least 8 characters, one uppercase letter, and one special character..
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid payment type..
         /// </summary>
         public static string INVALID_PAYMENT_TYPE {
@@ -102,33 +111,6 @@ namespace Cashflow.Exception {
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to It must contain at least one uppercase letter..
-        /// </summary>
-        public static string PASSWORD_1UPPER {
-            get {
-                return ResourceManager.GetString("PASSWORD_1UPPER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The password must be at least 8 characters..
-        /// </summary>
-        public static string PASSWORD_8CHAR {
-            get {
-                return ResourceManager.GetString("PASSWORD_8CHAR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The password must contain at least one special character..
-        /// </summary>
-        public static string PASSWORD_SPECIALCHAR {
-            get {
-                return ResourceManager.GetString("PASSWORD_SPECIALCHAR", resourceCulture);
             }
         }
         

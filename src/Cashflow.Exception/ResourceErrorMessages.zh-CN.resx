@@ -132,14 +132,8 @@
   <data name="NAME_EMPTY" xml:space="preserve">
     <value>名字不能为空。</value>
   </data>
-  <data name="PASSWORD_1UPPER" xml:space="preserve">
-    <value>必须包含一个大写字母。</value>
-  </data>
-  <data name="PASSWORD_8CHAR" xml:space="preserve">
-    <value>密码必须至少包含8个字符。</value>
-  </data>
-  <data name="PASSWORD_SPECIALCHAR" xml:space="preserve">
-    <value>密码必须包含至少一个特殊字符。</value>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>密码必须至少有8个字符，一个大写字母和一个特殊字符。</value>
   </data>
   <data name="REQUIRED_TITLE" xml:space="preserve">
     <value>标题是必填项。</value>
