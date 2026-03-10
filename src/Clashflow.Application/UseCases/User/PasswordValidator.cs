@@ -10,6 +10,11 @@ public partial class PasswordValidator<T> : PropertyValidator<T, string>
     private const string ERROR_MESSAGE_KEY = "ErrorMessage";
     public override string Name => "PasswordValidator";
 
+    protected override string GetDefaultMessageTemplate(string errorCode)
+    {
+        return $"{{{ERROR_MESSAGE_KEY}}}";
+    }
+
     public override bool IsValid(ValidationContext<T> context, string password)
     {
         if (string.IsNullOrWhiteSpace(password))
@@ -34,7 +39,7 @@ public partial class PasswordValidator<T> : PropertyValidator<T, string>
             context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.INVALID_PASSWORD);
             return false;
         }
-        if(!Regex.IsMatch(password, @"[\!\@\#\$\%\&\*\?\.]+"))
+        if(!Regex.IsMatch(password, @"[\!\@\#\$\%\&\*\?\.]+")) //deixei apenas para relembrar a forma tradicional de se utilizar o regex
         {
             context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.INVALID_PASSWORD);
             return false;
@@ -45,6 +50,7 @@ public partial class PasswordValidator<T> : PropertyValidator<T, string>
 
     [GeneratedRegex(@"[A-Z]+")]
     private static partial Regex UpperCaseLetter();
+    
     [GeneratedRegex(@"[0-9]+")]
     private static partial Regex Numbers();
 }

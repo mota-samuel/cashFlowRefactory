@@ -1,5 +1,6 @@
 ﻿using Cashflow.Domain.Repositories;
 using Cashflow.Domain.Repositories.Expense;
+using Cashflow.Domain.Security.Cryptography;
 using Cashflow.Infrastructure.DataAccess;
 using Cashflow.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ public static class DependencyInjectionExtension
     {
         AddRepository(builder);
         AddDbContext(builder, config);
+        AddSecurity(builder);
     }
     
     private static void AddRepository(IServiceCollection builder)
@@ -27,6 +29,11 @@ public static class DependencyInjectionExtension
     {
         var connectionString = config.GetConnectionString("DefaultConnection"); ;
         builder.AddDbContext<CashFlowDbContext>(config => config.UseSqlServer(connectionString));
+    }
+
+    private static void AddSecurity(IServiceCollection builder)
+    {
+        builder.AddScoped<IPasswordEncripter, Security.BCrypt>();
     }
 }
 
