@@ -1,5 +1,6 @@
 ﻿using Cashflow.Domain.Repositories;
 using Cashflow.Domain.Repositories.Expense;
+using Cashflow.Domain.Repositories.User;
 using Cashflow.Domain.Security.Cryptography;
 using Cashflow.Infrastructure.DataAccess;
 using Cashflow.Infrastructure.DataAccess.Repositories;
@@ -23,6 +24,7 @@ public static class DependencyInjectionExtension
         builder.AddScoped<IExpensesWriteRepository, RepositoriesExpenses>();
         builder.AddScoped<IExpensesReadFromRepository, RepositoriesExpenses>();
         builder.AddScoped<IExpenseUpdateRepository, RepositoriesExpenses>();
+        builder.AddScoped<IUserReadOnlyRepository, UserRepository> ();
     }
 
     private static void AddDbContext(IServiceCollection builder, IConfiguration config)

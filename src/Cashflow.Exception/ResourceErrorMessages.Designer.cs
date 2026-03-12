@@ -70,6 +70,15 @@ namespace Cashflow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This email has already been used..
+        /// </summary>
+        public static string EMAIL_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The expense wasn`t found.
         /// </summary>
         public static string EXPENSE_NOT_FOUND {

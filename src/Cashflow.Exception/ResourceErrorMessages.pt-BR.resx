@@ -144,4 +144,7 @@
   <data name="VALUE_GREATER_THAN_0" xml:space="preserve">
     <value>O valor precisa ser maior que zero.</value>
   </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>O e-mail já está sendo utilizado.</value>
+  </data>
 </root>

@@ -144,4 +144,7 @@
   <data name="VALUE_GREATER_THAN_0" xml:space="preserve">
     <value>金额必须大于零。</value>
   </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>此电子邮件已被使用。</value>
+  </data>
 </root>
