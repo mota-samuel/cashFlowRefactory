@@ -12,7 +12,7 @@ namespace Cashflow.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -25,7 +25,7 @@ namespace Cashflow.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,9 +45,9 @@ namespace Cashflow.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Expenses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Expenses_User_UserId",
+                        name: "FK_Expenses_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -65,7 +65,7 @@ namespace Cashflow.Infrastructure.Migrations
                 name: "Expenses");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

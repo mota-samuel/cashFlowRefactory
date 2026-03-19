@@ -23,7 +23,7 @@ public partial class PasswordValidator<T> : PropertyValidator<T, string>
             return false;
         }
 
-        if(password.Length <= 8)
+        if(password.Length < 8)
         {
             context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.INVALID_PASSWORD);
             return false;

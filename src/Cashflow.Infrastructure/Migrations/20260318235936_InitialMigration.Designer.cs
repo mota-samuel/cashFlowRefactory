@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cashflow.Infrastructure.Migrations
 {
     [DbContext(typeof(CashFlowDbContext))]
-    [Migration("20260307161234_InitialMigration")]
+    [Migration("20260318235936_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -93,7 +93,7 @@ namespace Cashflow.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Cashflow.Domain.Entities.Expense", b =>

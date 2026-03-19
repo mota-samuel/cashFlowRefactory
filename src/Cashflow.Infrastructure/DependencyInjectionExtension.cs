@@ -24,7 +24,8 @@ public static class DependencyInjectionExtension
         builder.AddScoped<IExpensesWriteRepository, RepositoriesExpenses>();
         builder.AddScoped<IExpensesReadFromRepository, RepositoriesExpenses>();
         builder.AddScoped<IExpenseUpdateRepository, RepositoriesExpenses>();
-        builder.AddScoped<IUserReadOnlyRepository, UserRepository> ();
+        builder.AddScoped<IUserReadOnlyRepository, UserRepository>();
+        builder.AddScoped<IUserWriteOnlyRepository, UserRepository>();
     }
 
     private static void AddDbContext(IServiceCollection builder, IConfiguration config)
