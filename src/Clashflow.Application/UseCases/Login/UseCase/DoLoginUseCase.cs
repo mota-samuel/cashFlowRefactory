@@ -5,7 +5,7 @@ using Cashflow.Domain.Security.Cryptography;
 using Cashflow.Domain.Security.Tokens;
 using Cashflow.Exception.ExceptionBase;
 
-namespace Cashflow.Application.UseCases.Login;
+namespace Cashflow.Application.UseCases.Login.UseCase;
 public class DoLoginUseCase : IDoLoginUseCase
 {
     private readonly IUserReadOnlyRepository _repository;
@@ -26,6 +26,8 @@ public class DoLoginUseCase : IDoLoginUseCase
         if (user is null)
             throw new InvalidLoginException();
 
+        Validate(request);
+
         var passwordMatch = _passwordEncripter.Verify(request.Password, user.Password);
 
         if (!passwordMatch)
@@ -38,5 +40,14 @@ public class DoLoginUseCase : IDoLoginUseCase
         };
 
     }
+
+    private void Validate(RequestLoginJson request)
+    {
+        var validator = new LoginPasswordValidator().Validate(request);
+        if (!validator.IsValid)
+        {
+            var errors = validator.Errors.Select(e => e.ErrorMessage).ToList();
+            throw new ErrorOnValidationException(errors);
+        }
+    }
 }
-   
