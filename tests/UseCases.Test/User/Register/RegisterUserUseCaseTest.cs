@@ -1,4 +1,6 @@
 ﻿using Cashflow.Application.UseCases.User.Register;
+using Cashflow.Exception;
+using Cashflow.Exception.ExceptionBase;
 using CommonTestsUtilities.Cryptography;
 using CommonTestsUtilities.Mapper;
 using CommonTestsUtilities.Repositories;
@@ -19,7 +21,20 @@ public class RegisterUserUseCaseTest
 
         result.Should().NotBeNull();
         result.Name.Should().Be(request.Name);
-        result.Token.Should().NotBeNullOrEmpty();
+        result.Token.Should().NotBeNullOrWhiteSpace();
+    }
+    [Fact]
+    public async Task Error_Name_Empty()
+    {
+        var request = RequestRegisterUserJsonBuilder.Build();
+        request.Name = string.Empty;
+        var useCase = FakeUseCase();
+
+        var act = async () => await useCase.Execute(request);
+
+       var result = await act.Should().ThrowAsync<ErrorOnValidationException>();
+
+        result.Where(ex => ex.GetErrors().Count == 1 && ex.GetErrors().Contains(ResourceErrorMessages.NAME_EMPTY));
     }
 
     private RegisterUserUseCase FakeUseCase()
