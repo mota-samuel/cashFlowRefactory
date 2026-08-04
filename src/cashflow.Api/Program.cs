@@ -100,3 +100,5 @@ async Task MigrationDataBase()
 
     await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
 }
+
+public partial class Program { } // Adicione esta linha para tornar a classe Program pública e parcial
