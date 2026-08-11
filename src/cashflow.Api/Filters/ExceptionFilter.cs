@@ -26,7 +26,7 @@ public class ExceptionFilter : IExceptionFilter
         //com o cast declarado desta forma, se a excecao nao for um cashflowException, ira acontecer uma excecao, se declarar usando a palavra reservada `as` e a '!' o cod executa como nulo
         var cashflowException = (CashflowException)context.Exception;
         context.HttpContext.Response.StatusCode = cashflowException.StatusCode;
-        context.Result = new ObjectResult(cashflowException.GetErrors());
+        context.Result = new ObjectResult(new ResponseErrorJson(cashflowException.GetErrors()));
     }
 
     private void ThrowUnknownException(ExceptionContext context)
