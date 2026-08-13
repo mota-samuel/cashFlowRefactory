@@ -18,10 +18,11 @@ public class DoLoginTest : IClassFixture<CustomWebApplicationFactory>
         _httpClient = factory.CreateClient();
         _email = factory.GetEmailUser();
         _password = factory.GetPasswordUser();
+        _name = factory.GetNameUser();
     }
 
     [Fact]
-    public async Task Success() 
+    public async Task Success()
     {
         var request = new RequestLoginJson
         {

@@ -33,11 +33,11 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 var dbContext = scope.ServiceProvider.GetRequiredService<CashFlowDbContext>();
                 var passwordEncripter = scope.ServiceProvider.GetRequiredService<IPasswordEncripter>();
 
-                StartDB(dbContext, passwordEncripter);
+                StartDb(dbContext, passwordEncripter);
             });
     }
 
-    private void StartDB(CashFlowDbContext dbContext, IPasswordEncripter passwordEncripter)
+    private void StartDb(CashFlowDbContext dbContext, IPasswordEncripter passwordEncripter)
     {
         _user = UserBuilder.Build();
 
