@@ -3,11 +3,14 @@ using Cashflow.Domain.Repositories.Expense;
 using Cashflow.Domain.Repositories.User;
 using Cashflow.Domain.Security.Cryptography;
 using Cashflow.Domain.Security.Tokens;
+using Cashflow.Domain.Services.LoggedUser;
 using Cashflow.Infrastructure.DataAccess;
 using Cashflow.Infrastructure.DataAccess.Repositories;
 using Cashflow.Infrastructure.Extensions;
 using Cashflow.Infrastructure.Security.Tokens;
+using Cashflow.Infrastructure.Services.LoggedUser;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +22,7 @@ public static class DependencyInjectionExtension
         AddRepository(builder);
         AddSecurity(builder);
         AddToken(builder, config);
+        GetTokenLoggedUser(builder);
 
         if (!config.IsTestEnvironment()) 
         {
@@ -42,6 +46,7 @@ public static class DependencyInjectionExtension
         builder.AddScoped<IExpenseUpdateRepository, RepositoriesExpenses>();
         builder.AddScoped<IUserReadOnlyRepository, UserRepository>();
         builder.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+    
     }
 
     private static void AddDbContext(IServiceCollection builder, IConfiguration config)
@@ -54,6 +59,8 @@ public static class DependencyInjectionExtension
     {
         builder.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
     }
+
+    private static void GetTokenLoggedUser(IServiceCollection builder)=> builder.AddScoped<ILoggedUser, LoggedUser>();
 }
 
 

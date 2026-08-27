@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Cashflow.Infrastructure.Extensions;
+using Cashflow.Domain.Security.Tokens;
+using cashflow.Api.Token;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +56,9 @@ builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)))
 //esse parametro foi incluido para que a injecao de dependencia possa acessar a connectionString do AppSettings
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddHttpContextAccessor();
 
 var signingKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey");
 
