@@ -1,23 +1,25 @@
 using cashflow.Api.Filters;
 using cashflow.Api.Middleware;
+using cashflow.Api.Token;
 using Cashflow.Application;
+using Cashflow.Domain.Security.Tokens;
 using Cashflow.Infrastructure;
+using Cashflow.Infrastructure.Extensions;
 using Cashflow.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Microsoft.OpenApi.Models;
-using Cashflow.Infrastructure.Extensions;
-using Cashflow.Domain.Security.Tokens;
-using cashflow.Api.Token;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(config =>
 {
     config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -47,6 +49,13 @@ builder.Services.AddSwaggerGen(config =>
             },
             new List<string>()
         }
+    });
+
+    config.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Cashflow API",
+        Version = "v1",
+        Description = "API para gestão de despesas pessoais"
     });
 });
 //add o filtro de exceção global
@@ -84,7 +93,15 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cashflow API v1");
+        c.DocExpansion(DocExpansion.None);
+        c.DefaultModelsExpandDepth(-1);
+        c.DefaultModelExpandDepth(0);
+        c.EnableDeepLinking();
+        c.EnablePersistAuthorization();
+    });
 }
 
 app.UseMiddleware<CultureMiddleware>();

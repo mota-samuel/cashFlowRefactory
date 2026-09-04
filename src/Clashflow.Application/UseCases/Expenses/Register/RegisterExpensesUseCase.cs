@@ -33,7 +33,6 @@ public class RegisterExpensesUseCase : IRegisterExpensesUseCase
 
         await _unitOfWork.Commit();
 
-
         return _mapper.Map<ResponsResgisterExpenseJson>(expense);
     }
 
