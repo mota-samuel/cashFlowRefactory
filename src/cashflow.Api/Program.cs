@@ -95,12 +95,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Cashflow API v1");
         c.DocExpansion(DocExpansion.None);
         c.DefaultModelsExpandDepth(-1);
-        c.DefaultModelExpandDepth(0);
-        c.EnableDeepLinking();
-        c.EnablePersistAuthorization();
+        c.ConfigObject.AdditionalItems["validatorUrl"] = null;
+
     });
 }
 

@@ -18,7 +18,7 @@ public class ExpensesController : ControllerBase
 {
     [HttpPost]
     [ProducesResponseType(typeof(ResponsResgisterExpenseJson), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ErrorOnValidationException), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterExpensesUseCase useCase,
         [FromBody] RequestExepenseJson request)
@@ -70,7 +70,7 @@ public class ExpensesController : ControllerBase
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateExpense(
                                                 [FromServices] IUpdateExpenseUseCase useCase, 
                                                  long id,
