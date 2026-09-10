@@ -15,27 +15,24 @@ internal class RepositoriesExpenses : IExpensesReadFromRepository, IExpensesWrit
        await _dbContext.AddAsync(expense);
     }
     // utilizar AsNoTracking para situacoes onde nao alteramos os dados da consulta
-    public async Task<List<Expense>> GetAll()
+    public async Task<List<Expense>> GetAll(User loggedUser )
     {
-        return await _dbContext.Expenses.AsNoTracking().ToListAsync();
+        return await _dbContext.Expenses.AsNoTracking().Where(expense => expense.UserId.Equals(loggedUser.UserId)).ToListAsync();
     }
 
-    async Task<Expense> IExpensesReadFromRepository.GetById(long id)
+    async Task<Expense?> IExpensesReadFromRepository.GetById(long id, User loggedUser)
     {
-        return await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(item => item.Id.Equals(id));
+        return await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(item => item.Id.Equals(id) && item.UserId.Equals(loggedUser.UserId));
     }
     async Task<Expense?> IExpenseUpdateRepository.GetById(long id, User user)
     {
         return await _dbContext.Expenses.FirstOrDefaultAsync(item => item.Id.Equals(id) && item.UserId.Equals(user.UserId));
     }
-    public async Task<bool> Delete(long id)
+    public async Task Delete(long id)
     {
-        var result =  await _dbContext.Expenses.AsNoTracking().FirstOrDefaultAsync(item => item.Id.Equals(id));
-        if (result is null) return false;
+        var result =  await _dbContext.Expenses.FindAsync(id);
 
-        _dbContext.Expenses.Remove(result);
-
-        return true;
+        _dbContext.Expenses.Remove(result!);
     
     }
 

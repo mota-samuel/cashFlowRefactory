@@ -69,7 +69,7 @@ public class ExpensesController : ControllerBase
 
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ResponseExpensesJson),StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateExpense(
                                                 [FromServices] IUpdateExpenseUseCase useCase, 
