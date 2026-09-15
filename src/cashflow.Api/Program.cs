@@ -7,7 +7,6 @@ using Cashflow.Infrastructure;
 using Cashflow.Infrastructure.Extensions;
 using Cashflow.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;

@@ -1,5 +1,4 @@
 ﻿using Cashflow.Application.UseCases.Expenses.Register;
-using Cashflow.Domain.Entities;
 using Cashflow.Exception;
 using Cashflow.Exception.ExceptionBase;
 using CommonTestsUtilities.Entities;
@@ -7,12 +6,6 @@ using CommonTestsUtilities.Mapper;
 using CommonTestsUtilities.Repositories;
 using CommonTestsUtilities.Requests;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UseCases.Test.Expense.Register;
 public class RegisterExpenseUseCaseTest
